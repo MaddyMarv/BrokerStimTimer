@@ -1,7 +1,5 @@
 local mod = get_mod("BrokerStimTimer")
 
-
-
 local widgets = {
 	{
 		setting_id = "display_group",
@@ -35,7 +33,7 @@ local widgets = {
 				type = "checkbox",
 				default_value = true,
 			},
-		}
+		},
 	},
 	{
 		setting_id = "shared_position_group",
@@ -66,24 +64,24 @@ local widgets = {
 				default_value = 670,
 				range = { 0, 1080 },
 			},
-		}
+		},
 	},
-		{
-			setting_id = "ready_group",
-			type = "group",
-			tab = mod:localize("ready_group"),
-			sub_widgets = {
-				{
-					setting_id = "ready_color",
-					type = "color",
-					default_value = { 255, 74, 177, 85 },
-				},
-				{
-					setting_id = "ready_icon_x",
-					type = "numeric",
-					default_value = 565,
-					range = { 0, 3840 },
-				},
+	{
+		setting_id = "ready_group",
+		type = "group",
+		tab = mod:localize("ready_group"),
+		sub_widgets = {
+			{
+				setting_id = "ready_color",
+				type = "color",
+				default_value = { 255, 74, 177, 85 },
+			},
+			{
+				setting_id = "ready_icon_x",
+				type = "numeric",
+				default_value = 565,
+				range = { 0, 3840 },
+			},
 			{
 				setting_id = "ready_icon_y",
 				type = "numeric",
@@ -95,36 +93,36 @@ local widgets = {
 				type = "checkbox",
 				default_value = true,
 			},
-		}
+		},
 	},
-		{
-			setting_id = "active_group",
-			type = "group",
-			tab = mod:localize("active_group"),
-			sub_widgets = {
-				{
-					setting_id = "active_color",
-					type = "color",
-					default_value = { 255, 226, 199, 126 },
-				},
-				{
-					setting_id = "active_icon_x",
-					type = "numeric",
-					default_value = 565,
-					range = { 0, 3840 },
-				},
-				{
-					setting_id = "active_icon_y",
-					type = "numeric",
-					default_value = 620,
-					range = { 0, 1080 },
-				},
-				{
-					setting_id = "active_text_x",
-					type = "numeric",
-					default_value = 561,
-					range = { 0, 3840 },
-				},
+	{
+		setting_id = "active_group",
+		type = "group",
+		tab = mod:localize("active_group"),
+		sub_widgets = {
+			{
+				setting_id = "active_color",
+				type = "color",
+				default_value = { 255, 226, 199, 126 },
+			},
+			{
+				setting_id = "active_icon_x",
+				type = "numeric",
+				default_value = 565,
+				range = { 0, 3840 },
+			},
+			{
+				setting_id = "active_icon_y",
+				type = "numeric",
+				default_value = 620,
+				range = { 0, 1080 },
+			},
+			{
+				setting_id = "active_text_x",
+				type = "numeric",
+				default_value = 561,
+				range = { 0, 3840 },
+			},
 			{
 				setting_id = "active_text_y",
 				type = "numeric",
@@ -141,36 +139,36 @@ local widgets = {
 				type = "checkbox",
 				default_value = true,
 			},
-		}
+		},
 	},
-		{
-			setting_id = "cooldown_group",
-			type = "group",
-			tab = mod:localize("cooldown_group"),
-			sub_widgets = {
-				{
-					setting_id = "cooldown_color",
-					type = "color",
-					default_value = { 255, 246, 69, 69 },
-				},
-				{
-					setting_id = "cooldown_icon_x",
-					type = "numeric",
-					default_value = 565,
-					range = { 0, 3840 },
-				},
-				{
-					setting_id = "cooldown_icon_y",
-					type = "numeric",
-					default_value = 620,
-					range = { 0, 1080 },
-				},
-				{
-					setting_id = "cooldown_text_x",
-					type = "numeric",
-					default_value = 561,
-					range = { 0, 3840 },
-				},
+	{
+		setting_id = "cooldown_group",
+		type = "group",
+		tab = mod:localize("cooldown_group"),
+		sub_widgets = {
+			{
+				setting_id = "cooldown_color",
+				type = "color",
+				default_value = { 255, 246, 69, 69 },
+			},
+			{
+				setting_id = "cooldown_icon_x",
+				type = "numeric",
+				default_value = 565,
+				range = { 0, 3840 },
+			},
+			{
+				setting_id = "cooldown_icon_y",
+				type = "numeric",
+				default_value = 620,
+				range = { 0, 1080 },
+			},
+			{
+				setting_id = "cooldown_text_x",
+				type = "numeric",
+				default_value = 561,
+				range = { 0, 3840 },
+			},
 			{
 				setting_id = "cooldown_text_y",
 				type = "numeric",
@@ -187,11 +185,9 @@ local widgets = {
 				type = "checkbox",
 				default_value = true,
 			},
-		}
+		},
 	},
 }
-
-
 
 return {
 	name = mod:localize("mod_name"),
@@ -201,5 +197,3 @@ return {
 		widgets = widgets,
 	},
 }
-
-

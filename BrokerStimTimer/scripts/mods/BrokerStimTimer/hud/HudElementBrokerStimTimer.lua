@@ -11,24 +11,23 @@ local STIMM_BUFF_NAME = "syringe_broker_buff"
 local STIMM_ABILITY_TYPE = "pocketable_ability"
 local STIMM_ICON_MATERIAL = "content/ui/materials/icons/pocketables/hud/syringe_broker"
 
-
 local function create_scenegraph()
 	local icon_size = mod:get("icon_size") or 64
 	local font_size = mod:get("font_size") or 30
 	local text_width = font_size * 2.5
 	local text_height = font_size * 1.2
 	local link_all_positions = mod:get("link_all_positions") ~= false
-	
+
 	local ready_icon_x, ready_icon_y
 	local active_icon_x, active_icon_y, active_text_x, active_text_y
 	local cooldown_icon_x, cooldown_icon_y, cooldown_text_x, cooldown_text_y
-	
+
 	if link_all_positions then
 		local shared_icon_x = mod:get("shared_icon_x") or 765
 		local shared_icon_y = mod:get("shared_icon_y") or 620
 		local shared_text_x = mod:get("shared_text_x") or 761
 		local shared_text_y = mod:get("shared_text_y") or 670
-		
+
 		ready_icon_x = shared_icon_x
 		ready_icon_y = shared_icon_y
 		active_icon_x = shared_icon_x
@@ -51,64 +50,64 @@ local function create_scenegraph()
 		cooldown_text_x = mod:get("cooldown_text_x") or 561
 		cooldown_text_y = mod:get("cooldown_text_y") or 670
 	end
-	
+
 	local scenegraph = {
 		screen = {
 			scale = "fit",
 			size = { 1920, 1080 },
-			position = { 0, 0, 0 }
+			position = { 0, 0, 0 },
 		},
 		shared_icon_root = {
 			parent = "screen",
 			horizontal_alignment = "left",
 			vertical_alignment = "top",
 			size = { icon_size, icon_size },
-			position = { mod:get("shared_icon_x") or 765, mod:get("shared_icon_y") or 620, 100 }
+			position = { mod:get("shared_icon_x") or 765, mod:get("shared_icon_y") or 620, 100 },
 		},
 		shared_text_root = {
 			parent = "screen",
 			horizontal_alignment = "left",
 			vertical_alignment = "top",
 			size = { text_width, text_height },
-			position = { mod:get("shared_text_x") or 761, mod:get("shared_text_y") or 670, 100 }
+			position = { mod:get("shared_text_x") or 761, mod:get("shared_text_y") or 670, 100 },
 		},
 		ready_icon_root = {
 			parent = "screen",
 			horizontal_alignment = "left",
 			vertical_alignment = "top",
 			size = { icon_size, icon_size },
-			position = { ready_icon_x, ready_icon_y, 100 }
+			position = { ready_icon_x, ready_icon_y, 100 },
 		},
 		active_icon_root = {
 			parent = "screen",
 			horizontal_alignment = "left",
 			vertical_alignment = "top",
 			size = { icon_size, icon_size },
-			position = { active_icon_x, active_icon_y, 100 }
+			position = { active_icon_x, active_icon_y, 100 },
 		},
 		active_text_root = {
 			parent = "screen",
 			horizontal_alignment = "left",
 			vertical_alignment = "top",
 			size = { text_width, text_height },
-			position = { active_text_x, active_text_y, 100 }
+			position = { active_text_x, active_text_y, 100 },
 		},
 		cooldown_icon_root = {
 			parent = "screen",
 			horizontal_alignment = "left",
 			vertical_alignment = "top",
 			size = { icon_size, icon_size },
-			position = { cooldown_icon_x, cooldown_icon_y, 100 }
+			position = { cooldown_icon_x, cooldown_icon_y, 100 },
 		},
 		cooldown_text_root = {
 			parent = "screen",
 			horizontal_alignment = "left",
 			vertical_alignment = "top",
 			size = { text_width, text_height },
-			position = { cooldown_text_x, cooldown_text_y, 100 }
-		}
+			position = { cooldown_text_x, cooldown_text_y, 100 },
+		},
 	}
-	
+
 	return scenegraph
 end
 
@@ -217,14 +216,14 @@ local function create_widgets()
 				value_id = "text",
 				style = timer_text_style,
 			},
-		}, "cooldown_text_root")
+		}, "cooldown_text_root"),
 	}
 end
 
 HudElementBrokerStimTimer.init = function(self, parent, draw_layer, start_scale)
 	local definitions = {
 		scenegraph_definition = create_scenegraph(),
-		widget_definitions = create_widgets()
+		widget_definitions = create_widgets(),
 	}
 
 	HudElementBrokerStimTimer.super.init(self, parent, draw_layer, start_scale, definitions)
@@ -243,11 +242,11 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 		local text_width = current_font_size * 2.5
 		local text_height = current_font_size * 1.2
 
-		for _, widget_name in ipairs({"shared_icon", "ready_icon", "active_icon", "cooldown_icon"}) do
+		for _, widget_name in ipairs({ "shared_icon", "ready_icon", "active_icon", "cooldown_icon" }) do
 			local widget = self._widgets_by_name[widget_name]
 			if widget then
 				widget.style.icon.size = { current_icon_size, current_icon_size }
-				
+
 				local node_name = widget_name .. "_root"
 				if self._ui_scenegraph and self._ui_scenegraph[node_name] then
 					self._ui_scenegraph[node_name].size = { current_icon_size, current_icon_size }
@@ -257,11 +256,11 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			end
 		end
 
-		for _, widget_name in ipairs({"shared_text", "active_text", "cooldown_text"}) do
+		for _, widget_name in ipairs({ "shared_text", "active_text", "cooldown_text" }) do
 			local widget = self._widgets_by_name[widget_name]
 			if widget then
 				widget.style.text.font_size = current_font_size
-				
+
 				local node_name = widget_name .. "_root"
 				if self._ui_scenegraph and self._ui_scenegraph[node_name] then
 					self._ui_scenegraph[node_name].size = { text_width, text_height }
@@ -270,7 +269,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 				widget.dirty = true
 			end
 		end
-		
+
 		if type(self._update_scenegraph) == "function" then
 			self:_update_scenegraph()
 		end
@@ -279,7 +278,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	local custom_hud_mod = rawget(_G, "get_mod") and get_mod("custom_hud")
 	local saved_node_settings = custom_hud_mod and custom_hud_mod:get("saved_node_settings") or {}
 	local element_name = self.__class_name
-	
+
 	local link_all_positions = mod:get("link_all_positions") ~= false
 	local shared_icon_node_name = string.format("%s|shared_icon_root", element_name)
 	local shared_text_node_name = string.format("%s|shared_text_root", element_name)
@@ -288,7 +287,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	local active_text_node_name = string.format("%s|active_text_root", element_name)
 	local cooldown_icon_node_name = string.format("%s|cooldown_icon_root", element_name)
 	local cooldown_text_node_name = string.format("%s|cooldown_text_root", element_name)
-	
+
 	local has_custom_hud_shared_icon = saved_node_settings[shared_icon_node_name] ~= nil
 	local has_custom_hud_shared_text = saved_node_settings[shared_text_node_name] ~= nil
 	local has_custom_hud_ready_icon = saved_node_settings[ready_icon_node_name] ~= nil
@@ -296,37 +295,79 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	local has_custom_hud_active_text = saved_node_settings[active_text_node_name] ~= nil
 	local has_custom_hud_cooldown_icon = saved_node_settings[cooldown_icon_node_name] ~= nil
 	local has_custom_hud_cooldown_text = saved_node_settings[cooldown_text_node_name] ~= nil
-	
-	local is_custom_hud_shared_icon_hidden = has_custom_hud_shared_icon and (saved_node_settings[shared_icon_node_name].is_hidden == true)
-	local is_custom_hud_shared_text_hidden = has_custom_hud_shared_text and (saved_node_settings[shared_text_node_name].is_hidden == true)
-	local is_custom_hud_ready_icon_hidden = has_custom_hud_ready_icon and (saved_node_settings[ready_icon_node_name].is_hidden == true)
-	local is_custom_hud_active_icon_hidden = has_custom_hud_active_icon and (saved_node_settings[active_icon_node_name].is_hidden == true)
-	local is_custom_hud_active_text_hidden = has_custom_hud_active_text and (saved_node_settings[active_text_node_name].is_hidden == true)
-	local is_custom_hud_cooldown_icon_hidden = has_custom_hud_cooldown_icon and (saved_node_settings[cooldown_icon_node_name].is_hidden == true)
-	local is_custom_hud_cooldown_text_hidden = has_custom_hud_cooldown_text and (saved_node_settings[cooldown_text_node_name].is_hidden == true)
-	
+
+	local is_custom_hud_shared_icon_hidden = has_custom_hud_shared_icon
+		and (saved_node_settings[shared_icon_node_name].is_hidden == true)
+	local is_custom_hud_shared_text_hidden = has_custom_hud_shared_text
+		and (saved_node_settings[shared_text_node_name].is_hidden == true)
+	local is_custom_hud_ready_icon_hidden = has_custom_hud_ready_icon
+		and (saved_node_settings[ready_icon_node_name].is_hidden == true)
+	local is_custom_hud_active_icon_hidden = has_custom_hud_active_icon
+		and (saved_node_settings[active_icon_node_name].is_hidden == true)
+	local is_custom_hud_active_text_hidden = has_custom_hud_active_text
+		and (saved_node_settings[active_text_node_name].is_hidden == true)
+	local is_custom_hud_cooldown_icon_hidden = has_custom_hud_cooldown_icon
+		and (saved_node_settings[cooldown_icon_node_name].is_hidden == true)
+	local is_custom_hud_cooldown_text_hidden = has_custom_hud_cooldown_text
+		and (saved_node_settings[cooldown_text_node_name].is_hidden == true)
+
 	if link_all_positions then
 		if not has_custom_hud_shared_icon then
-			self:set_scenegraph_position("shared_icon_root", mod:get("shared_icon_x") or 765, mod:get("shared_icon_y") or 620, 100)
+			self:set_scenegraph_position(
+				"shared_icon_root",
+				mod:get("shared_icon_x") or 765,
+				mod:get("shared_icon_y") or 620,
+				100
+			)
 		end
 		if not has_custom_hud_shared_text then
-			self:set_scenegraph_position("shared_text_root", mod:get("shared_text_x") or 761, mod:get("shared_text_y") or 670, 100)
+			self:set_scenegraph_position(
+				"shared_text_root",
+				mod:get("shared_text_x") or 761,
+				mod:get("shared_text_y") or 670,
+				100
+			)
 		end
 	else
 		if not has_custom_hud_ready_icon then
-			self:set_scenegraph_position("ready_icon_root", mod:get("ready_icon_x") or 565, mod:get("ready_icon_y") or 620, 100)
+			self:set_scenegraph_position(
+				"ready_icon_root",
+				mod:get("ready_icon_x") or 565,
+				mod:get("ready_icon_y") or 620,
+				100
+			)
 		end
 		if not has_custom_hud_active_icon then
-			self:set_scenegraph_position("active_icon_root", mod:get("active_icon_x") or 565, mod:get("active_icon_y") or 620, 100)
+			self:set_scenegraph_position(
+				"active_icon_root",
+				mod:get("active_icon_x") or 565,
+				mod:get("active_icon_y") or 620,
+				100
+			)
 		end
 		if not has_custom_hud_active_text then
-			self:set_scenegraph_position("active_text_root", mod:get("active_text_x") or 561, mod:get("active_text_y") or 670, 100)
+			self:set_scenegraph_position(
+				"active_text_root",
+				mod:get("active_text_x") or 561,
+				mod:get("active_text_y") or 670,
+				100
+			)
 		end
 		if not has_custom_hud_cooldown_icon then
-			self:set_scenegraph_position("cooldown_icon_root", mod:get("cooldown_icon_x") or 565, mod:get("cooldown_icon_y") or 620, 100)
+			self:set_scenegraph_position(
+				"cooldown_icon_root",
+				mod:get("cooldown_icon_x") or 565,
+				mod:get("cooldown_icon_y") or 620,
+				100
+			)
 		end
 		if not has_custom_hud_cooldown_text then
-			self:set_scenegraph_position("cooldown_text_root", mod:get("cooldown_text_x") or 561, mod:get("cooldown_text_y") or 670, 100)
+			self:set_scenegraph_position(
+				"cooldown_text_root",
+				mod:get("cooldown_text_x") or 561,
+				mod:get("cooldown_text_y") or 670,
+				100
+			)
 		end
 	end
 
@@ -337,13 +378,19 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	local active_icon_widget = self._widgets_by_name.active_icon
 	local cooldown_text_widget = self._widgets_by_name.cooldown_text
 	local cooldown_icon_widget = self._widgets_by_name.cooldown_icon
-	
+
 	if link_all_positions then
 		if not shared_icon_widget or not shared_text_widget then
 			return
 		end
 	else
-		if not ready_icon_widget or not active_text_widget or not active_icon_widget or not cooldown_text_widget or not cooldown_icon_widget then
+		if
+			not ready_icon_widget
+			or not active_text_widget
+			or not active_icon_widget
+			or not cooldown_text_widget
+			or not cooldown_icon_widget
+		then
 			return
 		end
 	end
@@ -351,27 +398,55 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	local game_mode_manager = Managers.state.game_mode
 	local game_mode_name = game_mode_manager and game_mode_manager:game_mode_name()
 	local is_in_hub = not game_mode_name or game_mode_name == "hub" or game_mode_name == "prologue_hub"
-	
+
 	local function hide_all_widgets()
 		if link_all_positions then
-			if shared_icon_widget then shared_icon_widget.content.visible = false end
-			if shared_text_widget then shared_text_widget.content.visible = false end
-			if ready_icon_widget then ready_icon_widget.content.visible = false end
-			if active_icon_widget then active_icon_widget.content.visible = false end
-			if active_text_widget then active_text_widget.content.visible = false end
-			if cooldown_icon_widget then cooldown_icon_widget.content.visible = false end
-			if cooldown_text_widget then cooldown_text_widget.content.visible = false end
+			if shared_icon_widget then
+				shared_icon_widget.content.visible = false
+			end
+			if shared_text_widget then
+				shared_text_widget.content.visible = false
+			end
+			if ready_icon_widget then
+				ready_icon_widget.content.visible = false
+			end
+			if active_icon_widget then
+				active_icon_widget.content.visible = false
+			end
+			if active_text_widget then
+				active_text_widget.content.visible = false
+			end
+			if cooldown_icon_widget then
+				cooldown_icon_widget.content.visible = false
+			end
+			if cooldown_text_widget then
+				cooldown_text_widget.content.visible = false
+			end
 		else
-			if shared_icon_widget then shared_icon_widget.content.visible = false end
-			if shared_text_widget then shared_text_widget.content.visible = false end
-			if ready_icon_widget then ready_icon_widget.content.visible = false end
-			if active_icon_widget then active_icon_widget.content.visible = false end
-			if active_text_widget then active_text_widget.content.visible = false end
-			if cooldown_icon_widget then cooldown_icon_widget.content.visible = false end
-			if cooldown_text_widget then cooldown_text_widget.content.visible = false end
+			if shared_icon_widget then
+				shared_icon_widget.content.visible = false
+			end
+			if shared_text_widget then
+				shared_text_widget.content.visible = false
+			end
+			if ready_icon_widget then
+				ready_icon_widget.content.visible = false
+			end
+			if active_icon_widget then
+				active_icon_widget.content.visible = false
+			end
+			if active_text_widget then
+				active_text_widget.content.visible = false
+			end
+			if cooldown_icon_widget then
+				cooldown_icon_widget.content.visible = false
+			end
+			if cooldown_text_widget then
+				cooldown_text_widget.content.visible = false
+			end
 		end
 	end
-	
+
 	if is_in_hub then
 		hide_all_widgets()
 		return
@@ -391,7 +466,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 
 	local buff_extension = ScriptUnit.has_extension(player_unit, "buff_system")
 	local ability_extension = ScriptUnit.has_extension(player_unit, "ability_system")
-	
+
 	if not buff_extension or not ability_extension then
 		hide_all_widgets()
 		return
@@ -399,7 +474,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 
 	local track_standard_stims = mod:get("track_standard_stims") ~= false
 	local is_broker_stim = false
-	
+
 	local archetype_name = player:archetype_name()
 	local equipped_abilities = ability_extension:equipped_abilities()
 	local pocketable_ability = equipped_abilities and equipped_abilities[STIMM_ABILITY_TYPE]
@@ -424,7 +499,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	local active_cooldown = 0
 	local active_icon_path = STIMM_ICON_MATERIAL
 	local active_color_tint = mod.get_stage_color("active")
-	
+
 	if is_broker_stim then
 		active_buff_time = self:_get_buff_remaining_time(buff_extension, STIMM_BUFF_NAME)
 		if ability_extension:is_ability_resource_regen_paused(STIMM_ABILITY_TYPE) then
@@ -433,19 +508,24 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			active_cooldown = ability_extension:missing_ability_resource_until_next_charge(STIMM_ABILITY_TYPE) or 0
 		end
 	end
-	
+
 	if not is_broker_stim or track_standard_stims then
 		local active_stimm_name = nil
 		local buffs_by_index = buff_extension._buffs_by_index
-		
+
 		if buffs_by_index then
 			for _, buff in pairs(buffs_by_index) do
 				local template = buff:template()
-				if template and template.name and string.find(template.name, "^syringe") and not string.find(template.name, "^syringe_broker_buff") then
+				if
+					template
+					and template.name
+					and string.find(template.name, "^syringe")
+					and not string.find(template.name, "^syringe_broker_buff")
+				then
 					local remaining = buff:duration_progress() or 1
 					local duration = buff:duration() or 15
 					local remaining_time = duration * remaining
-					
+
 					if remaining_time > active_buff_time then
 						active_buff_time = remaining_time
 						active_stimm_name = string.gsub(template.name, "_buff$", "") .. "_pocketable"
@@ -453,11 +533,11 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 				end
 			end
 		end
-		
+
 		if active_stimm_name then
 			local RecolorStimms = rawget(_G, "get_mod") and get_mod("RecolorStimms")
 			local found_custom_color = false
-			
+
 			if RecolorStimms and RecolorStimms.get_stimm_argb_255 and RecolorStimms:is_enabled() then
 				local recolor = RecolorStimms.get_stimm_argb_255(active_stimm_name)
 				if recolor then
@@ -465,7 +545,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 					found_custom_color = true
 				end
 			end
-			
+
 			if not found_custom_color then
 				local FALLBACK_COLORS = {
 					syringe_corruption_pocketable = { 255, 38, 205, 26 },
@@ -478,7 +558,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			end
 		end
 	end
-	
+
 	if not is_broker_stim and active_buff_time < 0.05 then
 		hide_all_widgets()
 		return
@@ -490,7 +570,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	local has_active_buff = remaining_buff_time and remaining_buff_time >= 0.05
 	local has_cooldown = remaining_cooldown and remaining_cooldown >= 0.05
 	local is_ready = false
-	
+
 	if is_broker_stim then
 		is_ready = not has_active_buff and not has_cooldown
 	end
@@ -501,10 +581,10 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 		active_text_widget.content.visible = false
 		cooldown_icon_widget.content.visible = false
 		cooldown_text_widget.content.visible = false
-		
+
 		if is_ready then
 			local ready_color = mod.get_stage_color("ready")
-			
+
 			if ready_show_icon and not is_custom_hud_shared_icon_hidden then
 				shared_icon_widget.content.visible = true
 				shared_icon_widget.content.icon = STIMM_ICON_MATERIAL
@@ -516,7 +596,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				shared_icon_widget.content.visible = false
 			end
-			
+
 			shared_text_widget.content.visible = false
 		elseif has_active_buff then
 			local active_color = active_color_tint
@@ -526,7 +606,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				display_text = string.format("%.0f", math.ceil(remaining_buff_time))
 			end
-			
+
 			if active_show_icon and not is_custom_hud_shared_icon_hidden then
 				shared_icon_widget.content.visible = true
 				shared_icon_widget.content.icon = active_icon_path
@@ -538,7 +618,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				shared_icon_widget.content.visible = false
 			end
-			
+
 			if active_show_timer and not is_custom_hud_shared_text_hidden then
 				shared_text_widget.content.text = display_text
 				shared_text_widget.content.visible = true
@@ -558,7 +638,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				display_text = string.format("%.0f", math.ceil(remaining_cooldown))
 			end
-			
+
 			if cooldown_show_icon and not is_custom_hud_shared_icon_hidden then
 				shared_icon_widget.content.visible = true
 				shared_icon_widget.content.icon = STIMM_ICON_MATERIAL
@@ -570,7 +650,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				shared_icon_widget.content.visible = false
 			end
-			
+
 			if cooldown_show_timer and not is_custom_hud_shared_text_hidden then
 				shared_text_widget.content.text = display_text
 				shared_text_widget.content.visible = true
@@ -589,10 +669,10 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 	else
 		shared_icon_widget.content.visible = false
 		shared_text_widget.content.visible = false
-		
+
 		if is_ready then
 			local ready_color = mod.get_stage_color("ready")
-			
+
 			if ready_show_icon and not is_custom_hud_ready_icon_hidden then
 				ready_icon_widget.content.visible = true
 				ready_icon_widget.content.icon = STIMM_ICON_MATERIAL
@@ -604,14 +684,14 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				ready_icon_widget.content.visible = false
 			end
-			
+
 			active_icon_widget.content.visible = false
 			active_text_widget.content.visible = false
 			cooldown_icon_widget.content.visible = false
 			cooldown_text_widget.content.visible = false
 		elseif has_active_buff then
 			ready_icon_widget.content.visible = false
-			
+
 			local active_color = active_color_tint
 			local display_text = ""
 			if show_decimals then
@@ -619,7 +699,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				display_text = string.format("%.0f", math.ceil(remaining_buff_time))
 			end
-			
+
 			if active_show_icon and not is_custom_hud_active_icon_hidden then
 				active_icon_widget.content.visible = true
 				active_icon_widget.content.icon = active_icon_path
@@ -631,7 +711,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				active_icon_widget.content.visible = false
 			end
-			
+
 			if active_show_timer and not is_custom_hud_active_text_hidden then
 				active_text_widget.content.text = display_text
 				active_text_widget.content.visible = true
@@ -643,14 +723,14 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				active_text_widget.content.visible = false
 			end
-			
+
 			cooldown_icon_widget.content.visible = false
 			cooldown_text_widget.content.visible = false
 		elseif has_cooldown then
 			ready_icon_widget.content.visible = false
 			active_icon_widget.content.visible = false
 			active_text_widget.content.visible = false
-			
+
 			local cooldown_color = mod.get_stage_color("cooldown")
 			local display_text = ""
 			if show_decimals then
@@ -658,7 +738,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				display_text = string.format("%.0f", math.ceil(remaining_cooldown))
 			end
-			
+
 			if cooldown_show_icon and not is_custom_hud_cooldown_icon_hidden then
 				cooldown_icon_widget.content.visible = true
 				cooldown_icon_widget.content.icon = STIMM_ICON_MATERIAL
@@ -670,7 +750,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			else
 				cooldown_icon_widget.content.visible = false
 			end
-			
+
 			if cooldown_show_timer and not is_custom_hud_cooldown_text_hidden then
 				cooldown_text_widget.content.text = display_text
 				cooldown_text_widget.content.visible = true
@@ -726,4 +806,3 @@ HudElementBrokerStimTimer.destroy = function(self, ui_renderer)
 end
 
 return HudElementBrokerStimTimer
-
