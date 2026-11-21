@@ -600,7 +600,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			shared_text_widget.content.visible = false
 		elseif has_active_buff then
 			local active_color = active_color_tint
-			local display_text = ""
+			local display_text
 			if show_decimals then
 				display_text = string.format("%.1f", remaining_buff_time)
 			else
@@ -632,7 +632,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			end
 		elseif has_cooldown then
 			local cooldown_color = mod.get_stage_color("cooldown")
-			local display_text = ""
+			local display_text
 			if show_decimals then
 				display_text = string.format("%.1f", remaining_cooldown)
 			else
@@ -693,7 +693,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			ready_icon_widget.content.visible = false
 
 			local active_color = active_color_tint
-			local display_text = ""
+			local display_text
 			if show_decimals then
 				display_text = string.format("%.1f", remaining_buff_time)
 			else
@@ -732,7 +732,7 @@ HudElementBrokerStimTimer.update = function(self, dt, t, ui_renderer, render_set
 			active_text_widget.content.visible = false
 
 			local cooldown_color = mod.get_stage_color("cooldown")
-			local display_text = ""
+			local display_text
 			if show_decimals then
 				display_text = string.format("%.1f", remaining_cooldown)
 			else
