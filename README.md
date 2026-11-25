@@ -8,25 +8,30 @@ Moveable on-screen timer for Broker stim duration and cooldown.
 
 **General**
 - Track Standard Stims
-- Font Size & Icon Size
+- Font Size
+- Icon Size
 - Show Decimals
 - Link All Positions
-- Shared Icon & Text Position X/Y
+- Shared Position (Icon Position X/Y, Text Position X/Y)
 
 **Ready**
 - Ready Color
-- Ready Icon Position X/Y
-- Show Ready Icon
+- Icon Position X/Y
+- Show Icon
 
 **Active**
 - Active Color
-- Active Icon & Text Position X/Y
-- Show Active Icon & Timer
+- Icon Position X/Y
+- Text Position X/Y
+- Show Icon
+- Show Timer
 
 **Cooldown**
 - Cooldown Color
-- Cooldown Icon & Text Position X/Y
-- Show Cooldown Icon & Timer
+- Icon Position X/Y
+- Text Position X/Y
+- Show Icon
+- Show Timer
 </details>
 
 🔗 **Links:** [Source Code](https://github.com/MaddyMarv/BrokerStimTimer-aka-Hive-Scum-Stim-Timer-) | [Nexus Mods Profile](https://www.nexusmods.com/profile/indicabunny) | [Support Me on Ko-fi](https://ko-fi.com/indicabunny)

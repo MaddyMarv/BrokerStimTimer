@@ -4,25 +4,30 @@ Moveable on-screen timer for Broker stim duration and cooldown.
 [spoiler]
 [b]General[/b]
 - Track Standard Stims
-- Font Size & Icon Size
+- Font Size
+- Icon Size
 - Show Decimals
 - Link All Positions
-- Shared Icon & Text Position X/Y
+- Shared Position (Icon Position X/Y, Text Position X/Y)
 
 [b]Ready[/b]
 - Ready Color
-- Ready Icon Position X/Y
-- Show Ready Icon
+- Icon Position X/Y
+- Show Icon
 
 [b]Active[/b]
 - Active Color
-- Active Icon & Text Position X/Y
-- Show Active Icon & Timer
+- Icon Position X/Y
+- Text Position X/Y
+- Show Icon
+- Show Timer
 
 [b]Cooldown[/b]
 - Cooldown Color
-- Cooldown Icon & Text Position X/Y
-- Show Cooldown Icon & Timer
+- Icon Position X/Y
+- Text Position X/Y
+- Show Icon
+- Show Timer
 [/spoiler]
 
 [b]Links:[/b]
