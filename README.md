@@ -34,4 +34,4 @@ Moveable on-screen timer for Broker stim duration and cooldown.
 - Show Timer
 </details>
 
-🔗 **Links:** [Source Code](https://github.com/MaddyMarv/BrokerStimTimer-aka-Hive-Scum-Stim-Timer-) | [Nexus Mods Profile](https://www.nexusmods.com/profile/indicabunny) | [Support Me on Ko-fi](https://ko-fi.com/indicabunny)
+🔗 **Links:** [Source Code](https://github.com/MaddyMarv/BrokerStimTimer) | [Nexus Mods Profile](https://www.nexusmods.com/profile/indicabunny) | [Support Me on Ko-fi](https://ko-fi.com/indicabunny)
